@@ -8,20 +8,21 @@
     <artifactId>boot-01-helloWorld</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <!--引入依赖-->
+    <!--依赖管理-->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.3.4.RELEASE</version>
     </parent>
-
+    <!--只要引入starter，这个场景的所有常规需要的依赖我们都自动引入-->
+    <!--引入依赖默认都可以不写版本 ,引入非版本仲裁的jar，要写版本号。-->
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
     </dependencies>
+
     <!--把项目打成jar包，直接在目标服务器执行即可。-->
     <build>
         <plugins>
@@ -32,6 +33,24 @@
         </plugins>
     </build>
 
+<!--    所有场景启动器最底层的依赖
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter</artifactId>
+        <version>2.3.4.RELEASE</version>
+        <scope>compile</scope>
+    </dependency>-->
+
+
+
+<!--
+    springBoot自动配置特性
+    1. 自动配好SpringMVC
+    2.自动配好Web常见功能，如：字符编码问题
+    3.默认的包结构,主程序所在包及其下面的所有子包里面的组件都会被默认扫描进来
+    无需以前的包扫描配置
+    4.想要改变扫描路径，@SpringBootApplication(scanBasePackages="com.atguigu")
+    或者@ComponentScan 指定扫描路径-->
 
 
 

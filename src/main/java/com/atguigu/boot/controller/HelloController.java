@@ -20,6 +20,6 @@ public class HelloController {
     //handle01()方法来处理/hello请求
     @RequestMapping("/hello")
     public String handle01(){
-        return "Hello, springBoot2!";
+        return "Hello, springBoot2!"+"你好！";
     }
 }
