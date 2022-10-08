@@ -1,5 +1,6 @@
 package com.atguigu.boot;
 
+import ch.qos.logback.core.db.DBHelper;
 import com.atguigu.boot.bean.Pet;
 import com.atguigu.boot.bean.User;
 import com.atguigu.boot.config.MyConfig;
@@ -11,7 +12,7 @@ import org.springframework.context.ConfigurableApplicationContext;
  * @author long
  * @create 2022 10 07 14:33
  */
-/*主程序类
+/*主程序类;主配置类
 *@SpringBootApplication：这是一个SpringBoot应用
 *
 * */
@@ -29,7 +30,7 @@ public class MainApplication {
         }
         //3.从容器中获取组件
 
-        Pet tom01 = run.getBean("tom", Pet.class);
+/*        Pet tom01 = run.getBean("tom", Pet.class);
         Pet tom02 = run.getBean("tom", Pet.class);//只注册一个，获取多个都是一样的
         System.out.println("组件："+(tom01 == tom02));
 
@@ -47,6 +48,28 @@ public class MainApplication {
         Pet tom = run.getBean("tom", Pet.class);
         System.out.println("用户的宠物："+(user01.getPet() == tom));
 
+        //5获取组件
+
+        String[] beanNamesForType = run.getBeanNamesForType(User.class);
+        System.out.println("=======");
+        for(String s : beanNamesForType){
+            System.out.println(s);
+
+        }
+
+        DBHelper bean1 = run.getBean(DBHelper.class);
+        System.out.println(bean1);
+        //com.atguigu.boot.bean.User
+        //user01
+        //ch.qos.logback.core.db.DBHelper@771158fb*/
+//        boolean tom = run.containsBean("tom");
+//        System.out.println("容器中Tom组件："+tom);
+
+        boolean tom22 = run.containsBean("tom22");
+        System.out.println("容器中Tom22组件："+tom22);
+
+        boolean user01 = run.containsBean("user01");
+        System.out.println("容器中User01组件："+user01);
 
     }
 }
