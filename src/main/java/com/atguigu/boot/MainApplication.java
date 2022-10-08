@@ -71,5 +71,10 @@ public class MainApplication {
         boolean user01 = run.containsBean("user01");
         System.out.println("容器中User01组件："+user01);
 
+        boolean haha = run.containsBean("haha");
+        boolean hehe = run.containsBean("hehe");
+        System.out.println("haha："+haha);//true
+        System.out.println("hehe："+hehe);//true
+
     }
 }

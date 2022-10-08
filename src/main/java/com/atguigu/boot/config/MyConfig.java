@@ -1,13 +1,16 @@
 package com.atguigu.boot.config;
 
 import ch.qos.logback.core.db.DBHelper;
+import com.atguigu.boot.bean.Car;
 import com.atguigu.boot.bean.Pet;
 import com.atguigu.boot.bean.User;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.ImportResource;
 
 /**
  *@Author: long
@@ -16,13 +19,15 @@ import org.springframework.context.annotation.Import;
  *@Version: 1.0
  *
  * 1、配置类里面使用@Bean标注在方法上给容器注册组件，默认也是单实例的
- * 2、配置类本身也是组件
+ * 2、配置类本身也是组件,在容器中
  * 3、proxyBeanMethods：代理bean的方法
  *      Full(proxyBeanMethods = true)、【保证每个@Bean方法被调用多少次返回的组件都是单实例的】
  *      Lite(proxyBeanMethods = false)【每个@Bean方法被调用多少次返回的组件都是新创建的】
  *      组件依赖必须使用Full模式默认。其他默认是否Lite模式
  * 4、@Import({User.class, DBHelper.class})
  *      给容器中自动创建出这两个类型的组件、默认组件的名字就是全类名
+ * 5、@ImportResource指以.xml结尾的配置文件，通过@ImportResource导入后SpringBoot进行解析，完成对应的组件注册
+ *   位置：在主配置类MyConfig的上方
  *
  *
  */
@@ -30,6 +35,10 @@ import org.springframework.context.annotation.Import;
 @Configuration() //(proxyBeanMethods = true)告诉SpringBoot这是一个配置类 == 配置文件
 //@ConditionalOnBean(name = "tom")
 @ConditionalOnMissingBean(name = "tom") //条件装配：满足Conditional指定的条件，则进行组件注入
+@ImportResource("classpath:beans.xml")
+@EnableConfigurationProperties(Car.class)
+//1、开启Car配置绑定功能
+//2、把这个Car这个组件自动注册到容器中
 public class MyConfig {
 //    @ConditionalOnBean(name = "tom")
     @Bean //给容器中添加组件。以方法名作为组件的id。返回类型就是组件类型。返回的值，就是组件在容器中的实例
